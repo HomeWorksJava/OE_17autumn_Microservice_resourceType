@@ -1,4 +1,4 @@
-package hu.microservices.homework.resourcetype.ResourceTypes_SpringBootService;
+package hu.microservices.homework.resourcetype.springbootservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

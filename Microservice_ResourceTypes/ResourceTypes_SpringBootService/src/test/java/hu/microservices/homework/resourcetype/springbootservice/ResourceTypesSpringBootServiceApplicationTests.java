@@ -1,4 +1,4 @@
-package hu.microservices.homework.resourcetype.ResourceTypes_SpringBootService;
+package hu.microservices.homework.resourcetype.springbootservice;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
