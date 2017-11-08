@@ -1,1 +1,10 @@
-# OE_17autumn_Microservice_resourceType
+# Erőforrás típusok kezelése
+
+adatmodel : resourcetype_datamodel
+spring rest: resourcetype_spring 
+dropwizard rest: resourcetype_dropwizard
+
+független UI-ok
+neptunkod 1
+neptunkod 2 
+
