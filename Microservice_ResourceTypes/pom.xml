@@ -5,6 +5,9 @@
     <artifactId>Microservice_ResourceTypes</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
+    <modules>
+        <module>ResourceTypes_DataModel</module>
+    </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
