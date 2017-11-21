@@ -1,0 +1,4 @@
+logging:
+  level: INFO
+  loggers:
+    hu.microservices.homework.resourcetype: DEBUG
