@@ -43,6 +43,15 @@
             <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-core</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.ext</groupId>
+            <artifactId>jersey-declarative-linking</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>ResourceTypes_DataModel</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
