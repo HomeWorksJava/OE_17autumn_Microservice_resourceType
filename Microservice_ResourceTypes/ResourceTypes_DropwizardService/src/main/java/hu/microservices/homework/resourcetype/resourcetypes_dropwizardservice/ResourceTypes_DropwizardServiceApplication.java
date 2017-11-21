@@ -24,6 +24,7 @@ public class ResourceTypes_DropwizardServiceApplication extends Application<Reso
     public void run(final ResourceTypes_DropwizardServiceConfiguration configuration,
                     final Environment environment) {
         // TODO: implement application
+        //test
     }
 
 }
