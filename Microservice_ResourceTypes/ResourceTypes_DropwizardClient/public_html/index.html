@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Resource Type Client</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            
+            fieldset, table {
+                width: 1000px;
+                border: 1px solid black;
+            }
+            tr, td, th {
+                border: 1px solid black;
+            }            
+
+        </style>
+    </head>
+    
+    <body>
+    
+        </br>
+
+        <button id="prev" >PREV</button>
+        <button id="next" >NEXT</button>
+
+        </br>
+        </br>
+
+        <table id="table1">     
+        </table>
+            
+        </br>
+        </br>
+            
+        <form action="#" onsubmit="getResourceType(this);">
+            <fieldset>
+                <legend>GET RESOURCE TYPE</legend>
+                <p><label class="field">ID*</label>
+                <input required type="text" id="get_resourcetype_id" value=""> 
+                <button>GET</button>
+            </fieldset>
+        </form>
+        
+        </br>
+        
+        <table id="table2">
+                <tr><th>ID</th><th>NAME</th><th>DESCRIPTION</th><th>MEASUREMENT</th><th>MATERIAL</th></tr>
+                    <tr>
+                        <td id="table2_td_id">-</td>
+                        <td id="table2_td_name">-</td>
+                        <td id="table2_td_description">-</td>
+                        <td id="table2_td_measurement">-</td>
+                        <td id="table2_td_material">-</td>
+                </tr>
+        </table>
+        
+        </br>
+        </br>
+        
+        <form action="#" onsubmit="addResourceType(this);">
+            <fieldset>
+                <legend>ADD RESOURCE TYPE</legend>
+                <p><label class="field">Name*</label><input required type="text" name="name" value=""></p>
+                <p><label class="field">Description</label><input type="text" name="description" value=""></p>                                      
+                <p>
+                    <label class="field">Material</label>
+                    <select name="material">
+                        <option value="SZERVES">SZERVES</option>
+                        <option value="SZERVETLEN">SZERVETLEN</option>
+                    </select>
+                </p>                               
+                <p>
+                    <label class="field">Measurement</label>
+                    <select name="measurement">
+                        <option value="G">G</option>
+                        <option value="L">L</option>
+                        <option value="M">M</option>
+                        <option value="DB">DB</option>
+                        <option value="M2">M2</option>
+                        <option value="M3">M3</option>
+                    </select>
+                </p>
+                <input type="submit" value="Add">
+            </fieldset>
+        </form>
+        
+        </br>
+        </br>
+        
+        <form action="#" onsubmit="modifyResourceType(this);">
+            <fieldset>
+                <legend>MODIFY RESOURCE TYPE</legend>
+                <p><label class="field">ID*</label><input required type="text" name="id" value=""></p>
+                <p><label class="field">Name</label><input type="text" name="name" value=""></p>
+                <p><label class="field">Description</label><input type="text" name="description" value=""></p>                                      
+                <p>
+                    <label class="field">Material</label>
+                    <select name="material">
+                        <option value=""></option>
+                        <option value="SZERVES">SZERVES</option>
+                        <option value="SZERVETLEN">SZERVETLEN</option>
+                    </select>
+                </p>                               
+                <p>
+                    <label class="field">Measurement</label>
+                    <select name="measurement">
+                        <option value=""></option>
+                        <option value="G">G</option>
+                        <option value="L">L</option>
+                        <option value="M">M</option>
+                        <option value="DB">DB</option>
+                        <option value="M2">M2</option>
+                        <option value="M3">M3</option>
+                    </select>
+                </p>
+                <input type="submit" value="Modify">
+            </fieldset>
+        </form>
+        
+        </br>
+        </br>
+        
+        <form action="#" onsubmit="deleteResourceType(this);">
+            <fieldset>
+                <legend>DELETE RESOURCE TYPE</legend>
+                <p><label class="field">ID*</label><input required type="text" name="id" value=""></p>               
+                <input type="submit" value="Delete">
+            </fieldset>
+        </form>
+        
+        <script>
+                
+            var ip = "localhost";
+            //var ip = "80.211.229.202"; 
+                                
+            refreshTable1();
+                                           
+            function loadTable1() {   
+                            
+                document.querySelector("#table1").
+                        innerHTML="<tr><th>ID</th><th>NAME</th><th>DESCRIPTION</th><th>MEASUREMENT</th><th>MATERIAL</th></tr>";     
+                
+                for(var x in this.response.resourcetypes) {   
+                    
+                    var row = document.createElement("tr");                  
+                    var field_id = document.createElement("td");
+                    var field_name = document.createElement("td");
+                    var field_description = document.createElement("td");
+                    var field_measurement = document.createElement("td");
+                    var field_material = document.createElement("td");
+                    
+                    field_id.textContent = this.response.resourcetypes[x].id;
+                    field_name.textContent = this.response.resourcetypes[x].name;
+                    field_description.textContent = this.response.resourcetypes[x].description;
+                    field_measurement.textContent = this.response.resourcetypes[x].measurement;
+                    field_material.textContent = this.response.resourcetypes[x].material;
+                     
+                    row.appendChild(field_id);
+                    row.appendChild(field_name);
+                    row.appendChild(field_description);
+                    row.appendChild(field_measurement);
+                    row.appendChild(field_material);
+                                        
+                    document.querySelector("#table1").appendChild(row);                    
+                }
+                
+                for(var x in this.response.links) {
+                    var nav = document.querySelector("#"+this.response.links[x].rel);
+                    if(nav != null) {
+                        nav.setAttribute("url", this.response.links[x].href);
+                    }
+                }             
+            }
+            
+            document.querySelector("#prev").addEventListener("click", getTable1Data);
+            document.querySelector("#next").addEventListener("click", getTable1Data);           
+            
+            function getTable1Data(event) {              
+                var oReq = new XMLHttpRequest();
+                oReq.responseType = "json";
+                oReq.addEventListener("load", loadTable1);
+                oReq.open("GET", event.target.getAttribute("url"));
+                oReq.send();
+            }                       
+            
+            function refreshTable1() {
+                var oReq = new XMLHttpRequest();
+                oReq.responseType = "json";
+                oReq.addEventListener("load", loadTable1);
+                oReq.open("GET", "http://" + ip + ":8080/resourcetype/" + "0/10");
+                oReq.send();
+            }
+            
+            
+            
+            function getResourceType(form) {
+                var oReq = new XMLHttpRequest();
+                oReq.responseType = "json";
+                oReq.addEventListener("load", getResouceTypeData);
+                oReq.open("GET", "http://" + ip + ":8080/resourcetype/" + form.get_resourcetype_id.value);
+                oReq.send();
+            }
+            
+            function getResouceTypeData() {
+                document.querySelector("#table2_td_id").innerHTML = this.response.id;
+                document.querySelector("#table2_td_name").innerHTML = this.response.name;
+                document.querySelector("#table2_td_description").innerHTML = this.response.description;
+                document.querySelector("#table2_td_measurement").innerHTML = this.response.measurement;
+                document.querySelector("#table2_td_material").innerHTML = this.response.material;
+            }
+            
+            function addResourceType(form) {
+                var oReq = new XMLHttpRequest();
+                oReq.addEventListener("load", refreshTable1);
+                url_params = "name=" + form.name.value + "&" + 
+                             "description=" + form.description.value + "&" +
+                             "material=" + form.material.value + "&" +
+                             "measurement=" + form.measurement.value;
+                             
+                oReq.open("POST", "http://" + ip + ":8080/resourcetype?" + url_params);
+                oReq.send();
+            }
+            
+             function modifyResourceType(form) {
+                var oReq = new XMLHttpRequest();
+                oReq.addEventListener("load", refreshTable1);
+                url_params = "";
+                if(form.name.value != "") {
+                    url_params = url_params + "name=" + form.name.value;
+                }
+                if(form.description.value != "") {
+                    url_params = url_params + "&" + "description=" + form.description.value;
+                }
+                if(form.material.value != "") {
+                    url_params = url_params + "&" + "material=" + form.material.value;
+                }
+                 if(form.measurement.value != "") {
+                    url_params = url_params + "&" + "measurement=" + form.measurement.value;
+                }                            
+                oReq.open("PUT", "http://" + ip + ":8080/resourcetype/" + form.id.value + "?"  + url_params);
+                oReq.send();
+            }
+            
+            function deleteResourceType(form) {
+                var oReq = new XMLHttpRequest();
+                oReq.addEventListener("load", refreshTable1);
+                oReq.open("DELETE", "http://" + ip + ":8080/resourcetype/" + form.id.value);
+                oReq.send();
+            }
+            
+         </script>     
+            
+            
+    </body>
+    
+</html>
