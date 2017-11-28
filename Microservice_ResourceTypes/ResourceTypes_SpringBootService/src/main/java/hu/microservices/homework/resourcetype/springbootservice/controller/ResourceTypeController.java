@@ -43,5 +43,16 @@ public class ResourceTypeController {
         }
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
-            
+
+    @RequestMapping(value = "/{offset}/{limit}", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<Object> getResourceType(
+            @PathVariable("offset") String offset,
+            @PathVariable("limit") String limit) {
+
+
+
+
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    }
 }
