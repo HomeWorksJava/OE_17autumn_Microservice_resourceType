@@ -14,15 +14,20 @@ function refreshResourceTypes() {
 function parseResourceTypes() {
     console.log(this.response);
     var table = document.getElementById('resourcetype-table');
-    addTableRow(table, {0: 'Id', 1: 'Név', 2: 'Mértékegység', 3: 'Anyagtulajdonság', 4: 'Leírás'}, 'th');
+    var thead = document.createElement('thead');
+    thead.className = 'thead-dark';
+    var tbody = document.createElement('tbody');
+    table.appendChild(thead);
+    table.appendChild(tbody);
+    addTableRow(thead, {0: 'Id', 1: 'Név', 2: 'Mértékegység', 3: 'Anyagtulajdonság', 4: 'Leírás'}, 'th');
     for (var x in this.response) {
-        addTableRow(table, this.response[x], 'td');
+        addTableRow(tbody, this.response[x], 'td');
     }
 }
 
-function addTableRow(table, items, celltype) {
+function addTableRow(parent, items, celltype) {
     var tr = document.createElement("tr");
-    table.appendChild(tr);
+    parent.appendChild(tr);
     for (var item in items) {
         var td = document.createElement(celltype);
         td.textContent = items[item];
@@ -34,7 +39,7 @@ function getResourceTypes() {
     var oReq = new XMLHttpRequest();
     oReq.responseType = 'json';
     oReq.addEventListener('load', parseResourceTypes);
-    oReq.open('GET', host + 'resourcetypes');
+    oReq.open('GET', host + 'resourcetype/all');
     oReq.send();
 }
 
@@ -58,14 +63,14 @@ function handlePost() {
     refreshResourceTypes();
 
 }
-function postResourceType() {
-    var name = document.getElementById('new-name').value;
-    var measurement = document.getElementById('new-measurement').value;
-    var material = document.getElementById('new-material').value;
-    var description = document.getElementById('new-description').value;
+function addResourceType() {
+    var name = document.getElementById('resourceTypeName').value;
+    var measurement = document.getElementById('resourceTypeMeasurement').value;
+    var material = document.getElementById('resourceTypeMaterial').value;
+    var description = document.getElementById('resourceTypeDescription').value;
     var resType = resourceType(0, name, measurement, material, description);
 
-    var link = host + 'postresourcetype';
+    var link = host + 'resourcetype/';
     var postReq = new XMLHttpRequest();
     postReq.open("POST", link);
     postReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');

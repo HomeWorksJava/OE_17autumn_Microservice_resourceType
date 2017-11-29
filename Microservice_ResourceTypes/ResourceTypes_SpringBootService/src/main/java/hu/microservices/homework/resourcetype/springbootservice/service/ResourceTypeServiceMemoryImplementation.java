@@ -3,6 +3,7 @@ package hu.microservices.homework.resourcetype.springbootservice.service;
 import java.util.ArrayList;
 import java.util.List;
 //import org.springframework.beans.factory.annotation.Value;
+import hu.microservices.homework.resourcetype.datamodel.ResourceTypePager;
 import org.springframework.stereotype.Component;
 import hu.microservices.homework.resourcetype.datamodel.ResourceType;
 import hu.microservices.homework.resourcetype.datamodel.EMaterial;
@@ -54,8 +55,8 @@ public class ResourceTypeServiceMemoryImplementation implements IResourceTypeSer
     }
 
     @Override
-    public List<ResourceType> getPagedResourceTypes(int offset, int limit) {
-        return resourceTypes;
+    public ResourceTypePager getPagedResourceTypes(int offset, int limit) {
+        return ResourceTypePageBuilder.createResourcePage(getAllResourceTypes(), offset, limit);
     }
 
     @Override
@@ -77,9 +78,9 @@ public class ResourceTypeServiceMemoryImplementation implements IResourceTypeSer
         return false;
     }
 
-    public ResourceType postResourceType(String name, EMeasurement measurement, EMaterial material, String description) {
+    public boolean addResourceType(String name, EMeasurement measurement, EMaterial material, String description) {
         ResourceType resourceType = new ResourceType(getNextId(), name, measurement, material, description);
         resourceTypes.add(resourceType);
-        return resourceType;
+        return true;
     }
 }
