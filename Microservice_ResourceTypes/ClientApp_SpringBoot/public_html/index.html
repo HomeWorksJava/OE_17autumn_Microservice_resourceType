@@ -1,152 +1,185 @@
 <!doctype html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title></title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
-          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+              integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
-            integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
-            crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
-            integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
-            crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+                integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+                integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+                integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/main.css">
 
-    <script src="js/main.js" type="application/javascript"></script>
-</head>
+        <script src="js/main.js" type="application/javascript"></script>
+    </head>
 
-<body>
+    <body>
 
-<div class="container">
-    <div class="row">
-        <div class="col-sm">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
 
-            <div class="card">
-                <div class="card-header">
-                    <ul class="nav nav-tabs card-header-tabs" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="all-list-tab" data-toggle="tab" href="#all-list" role="tab"
-                               aria-controls="all-list" aria-selected="true">Összes resource type</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="add-tab" data-toggle="tab" href="#add" role="tab"
-                               aria-controls="add" aria-selected="false">Resource type hozzáadás</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" href="#">Disabled</a>
-                        </li>
-                    </ul>
-                </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <ul class="nav nav-tabs card-header-tabs" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="all-list-tab" data-toggle="tab" href="#all-list" role="tab"
+                                       aria-controls="all-list" aria-selected="true">Összes resource type</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="add-tab" data-toggle="tab" href="#add" role="tab"
+                                       aria-controls="add" aria-selected="false">Resource type hozzáadás</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link disabled" href="#">Disabled</a>
+                                </li>
+                            </ul>
+                        </div>
 
-                <div class="tab-content">
-                    <div class="tab-pane fade show active" id="all-list" role="tabpanel" aria-labelledby="all-list-tab">
-                        <div class="card-body">
-                            <h4 class="card-title">Összes resource type</h4>
-                            <table id="resourcetype-table" class="table"></table>
-                            <a href="#" class="btn btn-primary" onclick="refreshResourceTypes();">Frissítés</a>
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active" id="all-list" role="tabpanel" aria-labelledby="all-list-tab">
+                                <div class="card-body">
 
-                            <hr>
 
-                            <h4 class="card-title">Resource type törlése</h4>
-                            <form>
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label for="resourceTypeIdToDelete">Törlendő nyersanyag id-je</label>
-                                            <input type="number" class="form-control" id="resourceTypeIdToDelete"
-                                                   placeholder="írd be a törölni kívánt nyersanyag id-ját...">
+                                    <nav aria-label="Page navigation example">
+                                        <ul class="pagination">
+                                            <li id="all-btn" class="page-item active" onclick="refreshResourceTypes(); switchPagingTo(0);"><a class="page-link" href="#">all</a></li>
+                                            <li id="paged-btn" class="page-item" onclick="refreshPagedResourceTypes(); switchPagingTo(1);"><a class="page-link" href="#">paged</a></li>    
+                                        </ul>
+                                    </nav>
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="input-group">
+                                                <span class="input-group-addon" id="offset-input">Offset</span>
+                                                <input type="number" class="form-control" id="offset" aria-describedby="offset-input" value="0">
+                                                <span class="input-group-addon" id="limit-input">Limit</span>
+                                                <input type="number" class="form-control" id="limit" aria-describedby="limit-input" value="5">
+                                            </div>
                                         </div>
+                                        <div class="col"></div>
+                                        <div class="col"></div>
                                     </div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
+                                    
+                                    <p></p>
+
+                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                        <button type="button" class="btn btn-secondary">Első</button>
+                                        <button type="button" class="btn btn-secondary"><<</button>
+                                        <button type="button" class="btn btn-secondary"> - </button>
+                                        <button type="button" class="btn btn-secondary">>></button>
+                                        <button type="button" class="btn btn-secondary">Utolsó</button>
+                                    </div>
+                                    
+                                    <p></p>
+
+                                    <h4 class="card-title">Összes resource type</h4>
+                                    <table id="resourcetype-table" class="table"></table>
+                                    <!--                                        <a href="#" class="btn btn-primary" onclick="refreshResourceTypes();">Frissítés</a>-->
+                                    <hr>
+
+                                    <h4 class="card-title">Resource type törlése</h4>
+                                    <form>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="resourceTypeIdToDelete">Törlendő nyersanyag id-je</label>
+                                                    <input type="number" class="form-control" id="resourceTypeIdToDelete"
+                                                           placeholder="írd be a törölni kívánt nyersanyag id-ját...">
+                                                </div>
+                                            </div>
+                                            <div class="col"></div>
+                                            <div class="col"></div>
+                                        </div>
+                                    </form>
+                                    <a href="#" class="btn btn-primary" onclick="deleteResourceType();">Törlés</a>
+
                                 </div>
-                            </form>
-                            <a href="#" class="btn btn-primary" onclick="deleteResourceType();">Törlés</a>
+                            </div>
+
+                            <div class="tab-pane fade" id="add" role="tabpanel" aria-labelledby="add-tab">
+                                <div class="card-body" id="">
+                                    <h4 class="card-title">Resource type felvétel</h4>
+
+                                    <form>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="resourceTypeIdToDelete">Nyersanyag neve</label>
+                                                    <input type="text" class="form-control" id="resourceTypeName"
+                                                           placeholder="írd be a nyersanyag nevét...">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="resourceTypeMeasurement">Nyersanyag mértékegysége</label>
+                                                    <select class="form-control" id="resourceTypeMeasurement">
+                                                        <option value="G">gramm</option>
+                                                        <option value="L">liter</option>
+                                                        <option value="M">méter</option>
+                                                        <option value="DB">darab</option>
+                                                        <option value="M2">négyzetméter</option>
+                                                        <option value="M3">köbméter</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="resourceTypeMaterial">Nyersanyag anyagtípusa</label>
+                                                    <select class="form-control" id="resourceTypeMaterial">
+                                                        <option value="SZERVES">szerves</option>
+                                                        <option value="SZERVETLEN">szervetlen</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col"></div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="resourceTypeDescription">Nyersanyag leírása</label>
+                                                    <textarea class="form-control" id="resourceTypeDescription"
+                                                              rows="3"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                    <a href="#" class="btn btn-primary" onclick="addResourceType();">Hozzáadás</a>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="ss" role="tabpanel" aria-labelledby="ss-tab">
+
+                            </div>
 
                         </div>
-                    </div>
-
-                    <div class="tab-pane fade" id="add" role="tabpanel" aria-labelledby="add-tab">
-                        <div class="card-body" id="">
-                            <h4 class="card-title">Resource type felvétel</h4>
-
-                            <form>
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label for="resourceTypeIdToDelete">Nyersanyag neve</label>
-                                            <input type="text" class="form-control" id="resourceTypeName"
-                                                   placeholder="írd be a nyersanyag nevét...">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="resourceTypeMeasurement">Nyersanyag mértékegysége</label>
-                                            <select class="form-control" id="resourceTypeMeasurement">
-                                                <option value="G">gramm</option>
-                                                <option value="L">liter</option>
-                                                <option value="M">méter</option>
-                                                <option value="DB">darab</option>
-                                                <option value="M2">négyzetméter</option>
-                                                <option value="M3">köbméter</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="resourceTypeMaterial">Nyersanyag anyagtípusa</label>
-                                            <select class="form-control" id="resourceTypeMaterial">
-                                                <option value="SZERVES">szerves</option>
-                                                <option value="SZERVETLEN">szervetlen</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col"></div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label for="resourceTypeDescription">Nyersanyag leírása</label>
-                                            <textarea class="form-control" id="resourceTypeDescription"
-                                                      rows="3"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-
-                            <a href="#" class="btn btn-primary" onclick="addResourceType();">Hozzáadás</a>
-                        </div>
-                    </div>
-
-                    <div class="tab-pane fade" id="ss" role="tabpanel" aria-labelledby="ss-tab">
 
                     </div>
 
+                    <!--<div class="card ">-->
+                    <!--<h4 class="card-header">Összes resource type</h4>-->
+                    <!--<div class="card-body">-->
+                    <!--<table id="resourcetype-table" class="table"></table>-->
+
+                    <!--<a href="#" class="btn btn-primary" onclick="getResourceTypes();">Frissítés</a>-->
+                    <!--</div>-->
+                    <!--</div>-->
                 </div>
-
             </div>
-
-            <!--<div class="card ">-->
-            <!--<h4 class="card-header">Összes resource type</h4>-->
-            <!--<div class="card-body">-->
-            <!--<table id="resourcetype-table" class="table"></table>-->
-
-            <!--<a href="#" class="btn btn-primary" onclick="getResourceTypes();">Frissítés</a>-->
-            <!--</div>-->
-            <!--</div>-->
         </div>
-    </div>
-</div>
 
 
-<script>init();</script>
-</body>
+        <script>init();</script>
+    </body>
 </html>

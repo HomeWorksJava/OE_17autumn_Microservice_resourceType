@@ -1,3 +1,9 @@
+// Netakadémiának van cassandra magyarázó videója, telepítés és használat.
+// data nucleus provider tud JPA-t implementálni cassandrahoz.
+
+
+
+
 //var host = 'http://microservice.overon.hu:8080/';
 var host = 'http://localhost:8080/';
 
@@ -6,14 +12,27 @@ function init() {
 }
 
 function refreshResourceTypes() {
-    var table = document.getElementById('resourcetype-table');
-    table.innerHTML = '';
+//    var table = document.getElementById('resourcetype-table');
+//    table.innerHTML = '';
     getResourceTypes();
 }
 
+function refreshPagedResourceTypes() {
+//    var table = document.getElementById('resourcetype-table');
+    var off = $('#offset');
+    var lim = $('#limit');
+
+    var oReq = new XMLHttpRequest();
+    oReq.responseType = 'json';
+    oReq.addEventListener('load', parsePagedResourceTypes);
+    oReq.open('GET', host + 'resourcetype/' + off.val() + '/' + lim.val());
+    oReq.send();
+}
+
 function parseResourceTypes() {
-    console.log(this.response);
+//    console.log(this.response);
     var table = document.getElementById('resourcetype-table');
+    table.innerHTML = '';
     var thead = document.createElement('thead');
     thead.className = 'thead-dark';
     var tbody = document.createElement('tbody');
@@ -24,6 +43,21 @@ function parseResourceTypes() {
         addTableRow(tbody, this.response[x], 'td');
     }
 }
+
+function parsePagedResourceTypes() {
+    var table = document.getElementById('resourcetype-table');
+    table.innerHTML = '';
+    var thead = document.createElement('thead');
+    thead.className = 'thead-dark';
+    var tbody = document.createElement('tbody');
+    table.appendChild(thead);
+    table.appendChild(tbody);
+    addTableRow(thead, {0: 'Id', 1: 'Név', 2: 'Mértékegység', 3: 'Anyagtulajdonság', 4: 'Leírás'}, 'th');
+    for (var x in this.response.items) {
+        addTableRow(tbody, this.response.items[x], 'td');
+    }
+}
+
 
 function addTableRow(parent, items, celltype) {
     var tr = document.createElement("tr");
@@ -90,5 +124,18 @@ function resourceType(id, name, measurement, material, description) {
         toParamString: function () {
             return 'name=' + name + '&measurement=' + measurement + '&material=' + material + '&description=' + description;
         }
+    }
+}
+
+
+function switchPagingTo(id) {
+    var all = $('#all-btn');
+    var paged = $('#paged-btn');
+    if (id == '0') {
+        all.addClass('active');
+        paged.removeClass('active');
+    } else {
+        all.removeClass('active');
+        paged.addClass('active');
     }
 }
