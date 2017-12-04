@@ -13,4 +13,6 @@ public interface IResourceTypeService {
     ResourceType getResourceType(long id);
 
     boolean addResourceType(String name, EMeasurement measurement, EMaterial material, String description);
+
+    boolean deleteResourceType(long id);
 }

@@ -69,7 +69,7 @@ public class ResourceTypeServiceMemoryImplementation implements IResourceTypeSer
         return null;
     }
 
-    public boolean deleteResource(long id) {
+    public boolean deleteResourceType(long id) {
         ResourceType res = getResourceType(id);
         if (res != null) {
             resourceTypes.remove(res);

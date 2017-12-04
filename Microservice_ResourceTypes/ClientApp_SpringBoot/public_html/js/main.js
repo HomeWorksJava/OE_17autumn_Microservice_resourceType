@@ -85,8 +85,8 @@ function handleDelete() {
 function deleteResourceType() {
     var oReq = new XMLHttpRequest();
     oReq.addEventListener('load', handleDelete);
-    var id = document.getElementById('delete-id').value;
-    var link = host + 'deleteresourcetype/' + id;
+    var id = document.getElementById('resourceTypeIdToDelete').value;
+    var link = host + 'resourcetype/' + id;
     console.log('Deleting ' + id + ' with link: ' + link);
     oReq.open('DELETE', link);
     oReq.send();

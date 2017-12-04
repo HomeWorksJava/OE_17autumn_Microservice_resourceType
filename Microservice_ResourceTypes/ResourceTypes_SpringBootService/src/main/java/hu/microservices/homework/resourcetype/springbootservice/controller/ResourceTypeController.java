@@ -83,4 +83,24 @@ public class ResourceTypeController {
 
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
+
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public ResponseEntity<Object> deleteResourceType(
+            @PathVariable("id") String id) {
+        long idNum;
+        try {
+            idNum = Long.parseLong(id);
+        } catch (NumberFormatException e) {
+
+            return new ResponseEntity<>("BAD REQUEST! Id path parameter must be number!", HttpStatus.BAD_REQUEST);
+        }
+        if (resourceTypeService.deleteResourceType(idNum)) {
+            return new ResponseEntity<>(null, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Id: " + idNum + " is not found! Delete method is unsuccessful.", HttpStatus.NOT_FOUND);
+        }
+    }
+
 }
