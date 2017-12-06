@@ -1,9 +1,9 @@
 package hu.microservices.homework.resourcetype.springbootservice.controller;
 
-import hu.microservices.homework.resourcetype.datamodel.EMaterial;
-import hu.microservices.homework.resourcetype.datamodel.EMeasurement;
-import hu.microservices.homework.resourcetype.datamodel.ResourceType;
-import hu.microservices.homework.resourcetype.datamodel.ResourceTypePager;
+import hu.microservices.homework.resourcetype.springdatamodel.EMaterial;
+import hu.microservices.homework.resourcetype.springdatamodel.EMeasurement;
+import hu.microservices.homework.resourcetype.springdatamodel.ResourceType;
+import hu.microservices.homework.resourcetype.springdatamodel.ResourceTypePager;
 import hu.microservices.homework.resourcetype.springbootservice.service.IResourceTypeService;
 import hu.microservices.homework.resourcetype.springbootservice.service.ResourceTypePageBuilder;
 import org.springframework.beans.factory.annotation.Autowired;

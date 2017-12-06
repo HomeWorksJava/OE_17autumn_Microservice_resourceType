@@ -1,7 +1,7 @@
 package hu.microservices.homework.resourcetype.springbootservice.service;
 
-import hu.microservices.homework.resourcetype.datamodel.ResourceType;
-import hu.microservices.homework.resourcetype.datamodel.ResourceTypePager;
+import hu.microservices.homework.resourcetype.springdatamodel.ResourceType;
+import hu.microservices.homework.resourcetype.springdatamodel.ResourceTypePager;
 
 import java.util.List;
 
