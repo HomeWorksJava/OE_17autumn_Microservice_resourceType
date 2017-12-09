@@ -1,9 +1,9 @@
 package hu.microservices.homework.resourcetype.springbootservice.controller;
 
-import hu.microservices.homework.resourcetype.datamodel.EMaterial;
-import hu.microservices.homework.resourcetype.datamodel.EMeasurement;
-import hu.microservices.homework.resourcetype.datamodel.ResourceType;
-import hu.microservices.homework.resourcetype.datamodel.ResourceTypePager;
+import hu.microservices.homework.resourcetype.springdatamodel.EMaterial;
+import hu.microservices.homework.resourcetype.springdatamodel.EMeasurement;
+import hu.microservices.homework.resourcetype.springdatamodel.ResourceType;
+import hu.microservices.homework.resourcetype.springdatamodel.ResourceTypePager;
 import hu.microservices.homework.resourcetype.springbootservice.service.IResourceTypeService;
 import hu.microservices.homework.resourcetype.springbootservice.service.ResourceTypePageBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,4 +83,24 @@ public class ResourceTypeController {
 
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
+
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public ResponseEntity<Object> deleteResourceType(
+            @PathVariable("id") String id) {
+        long idNum;
+        try {
+            idNum = Long.parseLong(id);
+        } catch (NumberFormatException e) {
+
+            return new ResponseEntity<>("BAD REQUEST! Id path parameter must be number!", HttpStatus.BAD_REQUEST);
+        }
+        if (resourceTypeService.deleteResourceType(idNum)) {
+            return new ResponseEntity<>(null, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Id: " + idNum + " is not found! Delete method is unsuccessful.", HttpStatus.NOT_FOUND);
+        }
+    }
+
 }

@@ -1,9 +1,9 @@
 package hu.microservices.homework.resourcetype.springbootservice.service;
 
-import hu.microservices.homework.resourcetype.datamodel.EMaterial;
-import hu.microservices.homework.resourcetype.datamodel.EMeasurement;
-import hu.microservices.homework.resourcetype.datamodel.ResourceType;
-import hu.microservices.homework.resourcetype.datamodel.ResourceTypePager;
+import hu.microservices.homework.resourcetype.springdatamodel.EMaterial;
+import hu.microservices.homework.resourcetype.springdatamodel.EMeasurement;
+import hu.microservices.homework.resourcetype.springdatamodel.ResourceType;
+import hu.microservices.homework.resourcetype.springdatamodel.ResourceTypePager;
 
 import java.util.List;
 
@@ -13,4 +13,6 @@ public interface IResourceTypeService {
     ResourceType getResourceType(long id);
 
     boolean addResourceType(String name, EMeasurement measurement, EMaterial material, String description);
+
+    boolean deleteResourceType(long id);
 }

@@ -3,11 +3,11 @@ package hu.microservices.homework.resourcetype.springbootservice.service;
 import java.util.ArrayList;
 import java.util.List;
 //import org.springframework.beans.factory.annotation.Value;
-import hu.microservices.homework.resourcetype.datamodel.ResourceTypePager;
+import hu.microservices.homework.resourcetype.springdatamodel.ResourceTypePager;
 import org.springframework.stereotype.Component;
-import hu.microservices.homework.resourcetype.datamodel.ResourceType;
-import hu.microservices.homework.resourcetype.datamodel.EMaterial;
-import hu.microservices.homework.resourcetype.datamodel.EMeasurement;
+import hu.microservices.homework.resourcetype.springdatamodel.ResourceType;
+import hu.microservices.homework.resourcetype.springdatamodel.EMaterial;
+import hu.microservices.homework.resourcetype.springdatamodel.EMeasurement;
 
 @Component
 public class ResourceTypeServiceMemoryImplementation implements IResourceTypeService {
@@ -69,7 +69,7 @@ public class ResourceTypeServiceMemoryImplementation implements IResourceTypeSer
         return null;
     }
 
-    public boolean deleteResource(long id) {
+    public boolean deleteResourceType(long id) {
         ResourceType res = getResourceType(id);
         if (res != null) {
             resourceTypes.remove(res);
