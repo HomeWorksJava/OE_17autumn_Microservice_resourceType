@@ -39,13 +39,11 @@ public class TestItemsManager {
         return ++nextId;
     }
 
-    //null: nincs erőforrás
-    public List<ResourceType> getResourceTypeTestItems() {
-        return this.resourceTypeTestItems.size() > 0 ? this.resourceTypeTestItems : null;
+    public List<ResourceType> getResourceTypeItems() {
+        return this.resourceTypeTestItems;
     }
 
-    //null: nincs erőforrás
-    public ResourceTypes getResourceTypeTestItems(int offset, int limit) {
+    public ResourceTypes getResourceTypeItems(int offset, int limit) {
         ResourceTypes resourceTypesTemp = new ResourceTypes(limit, offset, resourceTypeTestItems.size());
         for (int i = 0; (i + offset) < resourceTypeTestItems.size() && i < limit; i++) {
             resourceTypesTemp.addResource(resourceTypeTestItems.get(i + offset));
@@ -53,8 +51,7 @@ public class TestItemsManager {
         return resourceTypesTemp.getResourcetypes().isEmpty() ? null : resourceTypesTemp;
     }
 
-    //null: nincs erőforrás
-    public ResourceType getResourceTypeTestItem(long id) {
+    public ResourceType getResourceTypeItem(long id) {
         for (ResourceType resourceType : resourceTypeTestItems) {
             if (resourceType.getId() == id) {
                 return resourceType;
@@ -63,105 +60,10 @@ public class TestItemsManager {
         return null;
     }
 
-    //null param: default ertek
-    //return false: nincs nev
-    public Boolean addResourceType(String name, String description, String measurement, String material) {
+    public boolean addResourceType(String name, String description, String measurement, String material) {
 
-        if (name == null) {
-            return false;
-        }
-        String newResourceTypeName = name;
-
-        String newResourceTypeDescription;
-        if (description == null) {
-            newResourceTypeDescription = "";
-        } else {
-            newResourceTypeDescription = description;
-        }
-
-        EMeasurement newResourceTypeMeasurement;
-        if (measurement == null) {
-            newResourceTypeMeasurement = EMeasurement.G;
-        } else {
-            newResourceTypeMeasurement = stringMeasurementToEnum(measurement);
-        }
-
-        EMaterial newResourceTypeMaterial;
-        if (material == null) {
-            newResourceTypeMaterial = EMaterial.SZERVES;
-        } else {
-            newResourceTypeMaterial = stringMaterialToEnum(material);
-        }
-
-        this.resourceTypeTestItems.add(new ResourceType(getNextId(), newResourceTypeName, newResourceTypeMeasurement, newResourceTypeMaterial, newResourceTypeDescription));
-        return true;
-    }
-
-    //null: nincs módosítás
-    //return false: nincs id
-    //return null: nem található az erőforrás
-    public Boolean modifyResourceType(Long id, String name, String description, String measurement, String material) {
-        if (id == null) {
-            return false;
-        }
-        for (ResourceType resourceType : resourceTypeTestItems) {
-            if (resourceType.getId() == id) {
-
-                if (name != null) {
-                    resourceType.setName(name);
-                }
-
-                if (description != null) {
-                    resourceType.setDescription(description);
-                }
-
-                if (measurement != null) {
-                    resourceType.setMeasurement(stringMeasurementToEnum(measurement));
-                }
-
-                if (material != null) {
-                    resourceType.setMaterial(stringMaterialToEnum(material));
-                }
-
-                return true;
-            }
-        }
-        return null;
-    }
-
-    //return false: nincs id
-    //return null: nem található az erőforrás
-    public Boolean deleteResourceType(Long id) {
-        if (id == null) {
-            return false;
-        }
-        for (ResourceType resourceType : resourceTypeTestItems) {
-            if (resourceType.getId() == id) {
-                resourceTypeTestItems.remove(resourceType);
-                return true;
-            }
-        }
-        return null;
-    }
-
-    private EMaterial stringMaterialToEnum(String material) {
-        EMaterial ematerial;
-        switch (material) {
-            case "SZERVES":
-                ematerial = EMaterial.SZERVES;
-                break;
-            case "SZERVETLEN":
-                ematerial = EMaterial.SZERVETLEN;
-                break;
-            default:
-                ematerial = EMaterial.SZERVES;
-                break;
-        }
-        return ematerial;
-    }
-
-    private EMeasurement stringMeasurementToEnum(String measurement) {
         EMeasurement emeasurement;
+
         switch (measurement) {
             case "G":
                 emeasurement = EMeasurement.G;
@@ -185,6 +87,92 @@ public class TestItemsManager {
                 emeasurement = EMeasurement.G;
                 break;
         }
-        return emeasurement;
+
+        EMaterial ematerial;
+
+        switch (material) {
+            case "SZERVES":
+                ematerial = EMaterial.SZERVES;
+                break;
+            case "SZERVETLEN":
+                ematerial = EMaterial.SZERVETLEN;
+                break;
+            default:
+                ematerial = EMaterial.SZERVES;
+                break;
+        }
+        this.resourceTypeTestItems.add(new ResourceType(getNextId(), name, emeasurement, ematerial, description));
+        return true;
     }
+
+    public boolean modifyResourceType(long id, String name, String description, String measurement, String material) {
+        for (ResourceType resourceType : resourceTypeTestItems) {
+            if (resourceType.getId() == id) {
+                if (!name.equals("")) {
+                    resourceType.setName(name);
+                }
+                if (!description.equals("")) {
+                    resourceType.setDescription(description);
+                }
+                if (!measurement.equals("")) {
+                    EMeasurement emeasurement;
+
+                    switch (measurement) {
+                        case "G":
+                            emeasurement = EMeasurement.G;
+                            break;
+                        case "L":
+                            emeasurement = EMeasurement.L;
+                            break;
+                        case "M":
+                            emeasurement = EMeasurement.M;
+                            break;
+                        case "DB":
+                            emeasurement = EMeasurement.DB;
+                            break;
+                        case "M2":
+                            emeasurement = EMeasurement.M2;
+                            break;
+                        case "M3":
+                            emeasurement = EMeasurement.M3;
+                            break;
+                        default:
+                            emeasurement = EMeasurement.G;
+                            break;
+                    }
+                    resourceType.setMeasurement(emeasurement);
+                }
+                if (!material.equals("")) {
+                    EMaterial ematerial;
+
+                    switch (material) {
+                        case "SZERVES":
+                            ematerial = EMaterial.SZERVES;
+                            break;
+                        case "SZERVETLEN":
+                            ematerial = EMaterial.SZERVETLEN;
+                            break;
+                        default:
+                            ematerial = EMaterial.SZERVES;
+                            break;
+                    }
+
+                    resourceType.setMaterial(ematerial);
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean deleteResourceType(long id) {
+        for (ResourceType resourceType : resourceTypeTestItems) {
+            if (resourceType.getId() == id) {
+                resourceTypeTestItems.remove(resourceType);
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

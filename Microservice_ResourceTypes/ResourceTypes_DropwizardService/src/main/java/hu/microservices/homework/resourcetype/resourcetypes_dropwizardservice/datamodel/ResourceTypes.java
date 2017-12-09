@@ -30,7 +30,7 @@ public class ResourceTypes {
             @InjectLink(
                     resource = ResourceTypeController.class,
                     style = InjectLink.Style.ABSOLUTE,
-                    method = "GetResourceTypes",
+                    method = "GetResourceTypesWithPage",
                     condition = "${instance.page > 1}",
                     bindings = {
                             @Binding(name = "offset", value = "${instance.offset - instance.limit}"),
@@ -40,7 +40,7 @@ public class ResourceTypes {
             ), @InjectLink(
                     resource = ResourceTypeController.class,
                     style = InjectLink.Style.ABSOLUTE,
-                    method = "GetResourceTypes",
+                    method = "GetResourceTypesWithPage",
                     condition = "${instance.offset + instance.limit < instance.fullitemnumber}",
                     bindings = {
                             @Binding(name = "offset", value = "${instance.offset + instance.limit}"),

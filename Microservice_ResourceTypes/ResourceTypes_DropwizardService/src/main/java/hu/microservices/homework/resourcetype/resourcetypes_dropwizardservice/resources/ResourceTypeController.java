@@ -2,6 +2,7 @@
 package hu.microservices.homework.resourcetype.resourcetypes_dropwizardservice.resources;
 
 import hu.microservices.homework.resourcetype.resourcetypes_dropwizardservice.datamodel.ResourceTypes;
+import hu.microservices.homework.resourcetype.resourcetypes_dropwizardservice.servicemanager.ServiceManager;
 import hu.microservices.homework.resourcetype.resourcetypes_dropwizardservice.servicemanager.TestItemsManager;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -23,27 +24,28 @@ public class ResourceTypeController {
         return Response.ok("Welcome To Resource Type Service!").build();
     }
     
-    TestItemsManager testItemsManager = new TestItemsManager();
+    ServiceManager itemsManager = new ServiceManager();
+    //TestItemsManager itemsManager = new TestItemsManager();
     
     @GET
     @Path("/{which_one}")
     public Response GetResourceTypes(@PathParam("which_one") String which_one) {
         if(which_one.equals("all")) {
-            return testItemsManager.getResourceTypeTestItems() == null ?
+            return itemsManager.getResourceTypeItems() == null ?
                     Response.status(Response.Status.NO_CONTENT).build():
-                    Response.ok(testItemsManager.getResourceTypeTestItems()).build();
+                    Response.ok(itemsManager.getResourceTypeItems()).build();
         } else {
             long id = Long.parseLong(which_one);
-            return testItemsManager.getResourceTypeTestItem(id) == null ?
+            return itemsManager.getResourceTypeItem(id) == null ?
                     Response.status(Response.Status.NO_CONTENT).build():
-                    Response.ok(testItemsManager.getResourceTypeTestItem(id)).build();
+                    Response.ok(itemsManager.getResourceTypeItem(id)).build();
         }
     }
         
     @GET
     @Path("/{offset}/{limit}") 
-    public Response GetResourceTypes(@PathParam("offset") int offset, @PathParam("limit") int limit) {
-        ResourceTypes resourceTypesTemp = testItemsManager.getResourceTypeTestItems(offset, limit);
+    public Response GetResourceTypesWithPage(@PathParam("offset") int offset, @PathParam("limit") int limit) {
+        ResourceTypes resourceTypesTemp = itemsManager.getResourceTypeItems(offset, limit);
         return resourceTypesTemp == null ?
                 Response.status(Response.Status.NO_CONTENT).build(): 
                 Response.ok(resourceTypesTemp).build();     
@@ -55,7 +57,7 @@ public class ResourceTypeController {
                                  @QueryParam("measurement") String measurement,
                                  @QueryParam("material") String material) {
         
-        Boolean success = testItemsManager.addResourceType(name, description, measurement, material);
+        Boolean success = itemsManager.addResourceType(name, description, measurement, material);
 
         if(success == false) {
             return Response.status(Response.Status.BAD_REQUEST).build();
@@ -71,7 +73,7 @@ public class ResourceTypeController {
                                  @QueryParam("measurement") String measurement,
                                  @QueryParam("material") String material) {
         
-       Boolean success = testItemsManager.modifyResourceType(Long.valueOf(id), name, description, measurement, material);
+       Boolean success = itemsManager.modifyResourceType(Long.valueOf(id), name, description, measurement, material);
         
         if(success == null) {
             return Response.status(Response.Status.NO_CONTENT).build();
@@ -86,7 +88,7 @@ public class ResourceTypeController {
     @Path("/{id}")
     public Response DeleteResourceType(@PathParam("id") long id) {
         
-       Boolean success = testItemsManager.deleteResourceType(Long.valueOf(id));
+       Boolean success = itemsManager.deleteResourceType(Long.valueOf(id));
         
         if(success == null) {
             return Response.status(Response.Status.NO_CONTENT).build();
